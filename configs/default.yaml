@@ -1,0 +1,46 @@
+data:
+  dataset_name: "CIFAR10"
+  data_root: "data"
+  batch_size: 32
+  num_workers: 4
+  train_size: 500
+  test_size: 100
+  val_size: 100
+  superpixel_segments: 75
+  superpixel_compactness: 10.0
+  augment: true
+  normalize: true
+
+model:
+  model_type: "gcn"  # gcn, graphsage, gat, gin, transformer
+  hidden_channels: 64
+  num_layers: 2
+  dropout: 0.5
+  activation: "relu"
+  use_batch_norm: true
+  use_residual: false
+  pooling: "mean"  # mean, max, attention, set2set
+
+training:
+  epochs: 50
+  learning_rate: 0.01
+  weight_decay: 5e-4
+  scheduler: "cosine"  # cosine, step, plateau
+  patience: 10
+  early_stopping: true
+  gradient_clip: null
+  mixed_precision: false
+
+evaluation:
+  metrics: ["accuracy", "f1_macro", "f1_micro", "auroc"]
+  save_predictions: true
+  save_embeddings: true
+  visualize_attention: true
+  explain_predictions: true
+
+system:
+  device: "auto"  # auto, cuda, mps, cpu
+  seed: 42
+  deterministic: true
+  num_threads: null
+  log_level: "INFO"
